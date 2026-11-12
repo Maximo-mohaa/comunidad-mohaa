@@ -266,3 +266,207 @@
     </section>
 
     <!-- PESTAÑA RANKING -->
+        <section id="ranking" class="section">
+      <div class="card" style="margin-bottom:1rem;">
+        <h3>🏆 Tabla Oficial de Posiciones ELO</h3>
+        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
+          Solo los jugadores con insignia <span class="verified">✔</span> son elegibles para premios y la Selección Argentina.
+        </p>
+        <input type="text" id="search-player" placeholder="Buscar jugador por nick..." onkeyup="renderTables()" />
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Puesto</th>
+              <th>Jugador</th>
+              <th>ELO</th>
+              <th>Partidas</th>
+              <th>Ganadas</th>
+              <th>Perdidas</th>
+              <th>Kills</th>
+              <th>Muertes</th>
+              <th>K/D</th>
+            </tr>
+          </thead>
+          <tbody id="full-ranking-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="logros" class="section">
+      <div class="card" style="margin-bottom:1rem;">
+        <h3>🎖 Medallas y Logros de la Comunidad</h3>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Desbloquea reconocimientos jugando partidas oficiales en el servidor.</p>
+      </div>
+      <div class="ach-grid">
+        <div class="ach-card"><h4>🇦🇷 Albiceleste</h4><p>Alcanza el Top 7 del Ranking ELO y entra en zona de Selección Argentina.</p></div>
+        <div class="ach-card"><h4>💣 Especialista en Objetivos</h4><p>Gana 25 mapas oficiales en modo Objetivo (4v4 o superior).</p></div>
+        <div class="ach-card"><h4>🎯 Francotirador de Élite</h4><p>Supera los 150 disparos a la cabeza (Headshots) contra jugadores verificados.</p></div>
+        <div class="ach-card"><h4>🔥 Imparable</h4><p>Consigue una racha de 15 eliminaciones sin morir en una partida oficial.</p></div>
+        <div class="ach-card"><h4>🛡 Soldado Verificado</h4><p>Completa la verificación de tu nick e IP con la administración.</p></div>
+        <div class="ach-card"><h4>👑 Veterano de Guerra</h4><p>Completa 50 partidas oficiales sin abandonar antes de terminar el mapa.</p></div>
+      </div>
+    </section>
+
+    <section id="descargas" class="section">
+      <div class="grid-3">
+        <div class="card">
+          <h3>💿 Juego Completo Portable</h3>
+          <img src="juego.jpg" alt="Portada MOHAA Portable" style="width:100%; height:190px; object-fit:cover; border-radius:6px; margin-bottom:0.85rem; border:1px solid var(--border);" />
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
+            MOHAA + Spearhead + Breakthrough listo para descomprimir y jugar en Windows 10/11 sin errores.
+          </p>
+          <a href="#" class="btn btn-gold" onclick="alert('Próximamente: aquí pondremos tu enlace de Google Drive / MediaFire')">⬇ Descargar Juego (Próximamente)</a>
+        </div>
+        <div class="card">
+          <h3>🗺 Pack de Mapas Oficiales</h3>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
+            Todos los mapas de Objetivo de la rotación competitiva listos para copiar en la carpeta <code>mainta</code>.
+          </p>
+          <a href="#" class="btn" onclick="alert('Próximamente: aquí pondremos el enlace del Pack de Mapas')">⬇ Descargar Mapas (Próximamente)</a>
+        </div>
+        <div class="card">
+          <h3>💬 Comunidad WhatsApp</h3>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
+            Únete a los canales de Avisos, Soporte y Chat General para enterarte cuándo se arman los Mix.
+          </p>
+          <a href="#verificar" class="btn btn-outline" onclick="showTab('verificar', document.querySelectorAll('nav button'))">Ir a Verificación</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="verificar" class="section">
+      <div class="card" style="margin-bottom:1.2rem;">
+        <h3>✔ Cómo Verificar tu Nick y Entrar al Servidor</h3>
+        <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:1rem;">
+          Para evitar suplantaciones de identidad, cheats o ataques al servidor, es obligatorio registrar tu nick único con la administración.
+        </p>
+        <div style="max-width:450px;">
+          <label style="font-size:0.85rem; color:var(--gold);">Escribe tu Nick exacto del juego:</label>
+          <input type="text" id="wa-nick" placeholder="Ej: Soldado_AR" />
+          <button class="btn" onclick="sendWhatsApp()">📲 Solicitar Verificación por WhatsApp</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📜 Reglamento Básico de Convivencia</h3>
+        <ul style="padding-left:1.2rem; color:var(--text-muted); font-size:0.92rem; line-height:1.8;">
+          <li><strong>Prohibido el uso de cheats, scripts o modificaciones</strong> que otorguen ventaja injusta.</li>
+          <li><strong>Sin banderas ni política de clanes:</strong> en los Mix todos juegan como compañeros bajo el mismo objetivo.</li>
+          <li><strong>Compromiso de partida:</strong> si entras a un Mix 4v4+, debes terminarlo salvo fuerza mayor.</li>
+          <li><strong>Respeto mutuo:</strong> insultos graves, toxicidad o difusión de la IP del servidor conllevan expulsión inmediata.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="admin" class="section">
+      <div class="card" id="admin-login" style="max-width:420px; margin:0 auto;">
+        <h3>🔐 Acceso Administración</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.8rem;">Ingresa la clave de administrador para gestionar jugadores y generar la Whitelist.</p>
+        <input type="password" id="admin-pass" placeholder="Clave de administrador" />
+        <button class="btn btn-gold" onclick="loginAdmin()">Entrar</button>
+      </div>
+
+      <div id="admin-panel" style="display:none;">
+        <div class="grid-3">
+          <div class="card">
+            <h3>➕ Verificar / Agregar Jugador</h3>
+            <input type="text" id="new-nick" placeholder="Nick exacto en el juego" />
+            <input type="text" id="new-ip" placeholder="IP del jugador (opcional)" />
+            <button class="btn" onclick="addVerifiedPlayer()">Guardar Verificado ✔</button>
+          </div>
+          <div class="card">
+            <h3>📝 Generar Whitelist.cfg</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Copia este texto en tu archivo <code>whitelist.cfg</code> del servidor Linux:</p>
+            <textarea id="whitelist-output" rows="5" readonly></textarea>
+            <button class="btn btn-gold" onclick="copyWhitelist()">Copiar Whitelist</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    COMUNIDAD DE MEDAL OF HONOR · Argentina 🇦🇷 · Sistema ELO & Estadísticas Automatizadas
+  </footer>
+
+  <script>
+    const WHATSAPP_NUMBER = "5490000000000";
+    const ADMIN_PASSWORD = "admin";
+    let playersData = [];
+
+    fetch('stats.json?v=' + Date.now())
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data && data.players) {
+          playersData = data.players;
+          if (data.updated) {
+            document.getElementById('last-update').innerHTML = `Actualizado: <strong>${data.updated}</strong>`;
+          }
+          renderAll();
+        }
+      })
+      .catch(err => console.error("Error cargando stats.json:", err));
+
+    function showTab(tabId, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      if (btn) btn.classList.add('active');
+    }
+
+    function renderAll() {
+      playersData.sort((a, b) => b.elo - a.elo);
+      renderSeleccion();
+      renderTables();
+      updateWhitelistBox();
+    }
+
+    function renderSeleccion() {
+      const top7 = playersData.filter(p => p.verified).slice(0, 7);
+      const container = document.getElementById('seleccion-list');
+      if (top7.length === 0) {
+        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.9rem;">Aún no hay jugadores verificados con tilde ✔ en <code>verificados.json</code>.</p>`;
+        return;
+      }
+      container.innerHTML = top7.map((p, idx) => `
+        <div class="player-sel">
+          <div class="pos">TITULAR #${idx + 1}</div>
+          <div class="nick">${p.nick} ✔</div>
+          <div class="elo">${p.elo} ELO</div>
+        </div>
+      `).join('');
+    }
+
+    function renderTables() {
+      const query = (document.getElementById('search-player')?.value || '').toLowerCase();
+      const filtered = playersData.filter(p => p.nick.toLowerCase().includes(query));
+
+      document.getElementById('top5-table').innerHTML = playersData.slice(0, 5).map((p, i) => `
+        <tr>
+          <td><strong>#${i + 1}</strong></td>
+          <td>${p.nick} ${p.verified ? '<span class="verified">✔</span>' : '<span class="unverified">(Sin verificar)</span>'}</td>
+          <td><strong style="color:var(--gold)">${p.elo}</strong></td>
+          <td>${p.matches}</td>
+          <td>${p.wins}</td>
+          <td>${(p.kills / Math.max(1, p.deaths)).toFixed(2)}</td>
+        </tr>
+      `).join('');
+
+      document.getElementById('full-ranking-table').innerHTML = filtered.map((p, i) => `
+        <tr>
+          <td><strong>#${i + 1}</strong></td>
+          <td>${p.nick} ${p.verified ? '<span class="verified">✔</span>' : '<span class="unverified">(Pendiente)</span>'}</td>
+          <td><strong style="color:var(--gold)">${p.elo}</strong></td>
+          <td>${p.matches}</td>
+          <td>${p.wins}</td>
+          <td>${p.losses}</td>
+          <td>${p.kills}</td>
+          <td>${p.deaths}</td>
+          <td>${(p.kills / Math.max(1, p.deaths)).toFixed(2)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function sendWhatsApp() {
