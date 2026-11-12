@@ -5,196 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COMUNIDAD DE MEDAL OF HONOR | Ranking ELO & Selección Argentina</title>
   <style>
-    :root {
-      --bg-dark: #0d1115;
-      --bg-panel: #151b21;
-      --bg-olive: #1e261f;
-      --border: #2a343d;
-      --text-main: #e6edf3;
-      --text-muted: #8b949e;
-      --gold: #d4af37;
-      --celeste: #74acdf;
-      --celeste-dark: #4a89c2;
-      --danger: #e5534b;
-      --success: #3fb950;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    :root { --bg-dark: #0d1115; --bg-panel: #151b21; --bg-olive: #1e261f; --border: #2a343d; --text-main: #e6edf3; --text-muted: #8b949e; --gold: #d4af37; --celeste: #74acdf; --success: #3fb950; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Arial, sans-serif; }
     body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.5; }
-
-    /* Hero Banner estilo WWII + Moderno */
-    header {
-      background: linear-gradient(to bottom, rgba(13,17,21,0.75), rgba(13,17,21,0.98)),
-                  url('banner.jpg') center/cover no-repeat;
-      border-bottom: 2px solid var(--gold);
-      padding: 2.5rem 1rem 1.5rem;
-      text-align: center;
-    }
-    .badge-ar {
-      display: inline-block;
-      background: rgba(116, 172, 223, 0.15);
-      border: 1px solid var(--celeste);
-      color: var(--celeste);
-      padding: 0.25rem 0.85rem;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 0.75rem;
-      text-transform: uppercase;
-    }
-    header h1 {
-      font-size: 2.2rem;
-      letter-spacing: 1.5px;
-      color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-    }
+    header { background: linear-gradient(to bottom, rgba(13,17,21,0.75), rgba(13,17,21,0.98)), url('banner.jpg') center/cover no-repeat; border-bottom: 2px solid var(--gold); padding: 2.5rem 1rem 1.5rem; text-align: center; }
+    .escudo-wrap { width: 185px; height: 185px; margin: 0 auto 1rem; border-radius: 50%; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,0.95); }
+    .escudo-wrap img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.24); }
+    .badge-ar { display: inline-block; background: rgba(116, 172, 223, 0.15); border: 1px solid var(--celeste); color: var(--celeste); padding: 0.25rem 0.85rem; border-radius: 20px; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.75rem; text-transform: uppercase; }
+    header h1 { font-size: 2.2rem; letter-spacing: 1.5px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
     header h1 span { color: var(--gold); }
     header p { color: var(--text-muted); max-width: 680px; margin: 0.5rem auto 1.25rem; font-size: 0.98rem; }
-
-    .server-bar {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: center;
-      background: var(--bg-panel);
-      border: 1px solid var(--border);
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-    }
+    .server-bar { display: inline-flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; background: var(--bg-panel); border: 1px solid var(--border); padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; }
     .server-bar span strong { color: var(--gold); }
     .status-dot { display: inline-block; width: 9px; height: 9px; background: var(--success); border-radius: 50%; margin-right: 5px; }
-
-    /* Navegación */
-    nav {
-      background: var(--bg-panel);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.4rem;
-      padding: 0.6rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav button {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.92rem;
-      transition: all 0.2s;
-    }
+    nav { background: var(--bg-panel); border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; padding: 0.6rem; position: sticky; top: 0; z-index: 100; }
+    nav button { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.92rem; }
     nav button:hover { color: #fff; background: rgba(255,255,255,0.05); }
-    nav button.active {
-      background: var(--bg-olive);
-      color: var(--gold);
-      border-color: var(--gold);
-    }
-
+    nav button.active { background: var(--bg-olive); color: var(--gold); border-color: var(--gold); }
     main { max-width: 1120px; margin: 1.8rem auto; padding: 0 1rem; }
     .section { display: none; }
     .section.active { display: block; }
-
-    /* Tarjetas y Grillas */
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-    .card {
-      background: var(--bg-panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.25rem;
-    }
-    .card h3 { font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--gold); display: flex; align-items: center; gap: 0.5rem; }
-
-    /* Selección Argentina */
-    .seleccion-box {
-      background: linear-gradient(135deg, #131c26 0%, #162638 100%);
-      border: 1px solid var(--celeste);
-      border-radius: 10px;
-      padding: 1.4rem;
-      margin-bottom: 1.5rem;
-    }
+    .card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+    .card h3 { font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--gold); }
+    .seleccion-box { background: linear-gradient(135deg, #131c26 0%, #162638 100%); border: 1px solid var(--celeste); border-radius: 10px; padding: 1.4rem; margin-bottom: 1.5rem; }
     .seleccion-box h2 { color: var(--celeste); font-size: 1.3rem; margin-bottom: 0.3rem; }
     .seleccion-box p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
     .seleccion-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; }
-    .player-sel {
-      background: rgba(13, 17, 21, 0.75);
-      border: 1px solid rgba(116, 172, 223, 0.35);
-      border-radius: 8px;
-      padding: 0.75rem;
-      text-align: center;
-    }
+    .player-sel { background: rgba(13, 17, 21, 0.75); border: 1px solid rgba(116, 172, 223, 0.35); border-radius: 8px; padding: 0.75rem; text-align: center; }
     .player-sel .pos { font-size: 0.75rem; color: var(--celeste); font-weight: 700; }
     .player-sel .nick { font-weight: 700; font-size: 0.98rem; margin: 0.2rem 0; color: #fff; }
     .player-sel .elo { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
-
-    /* Tablas */
     .table-wrap { overflow-x: auto; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; }
     table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; }
     th, td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--border); }
-    th { background: var(--bg-olive); color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
-    tr:hover { background: rgba(255,255,255,0.02); }
+    th { background: var(--bg-olive); color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; }
     .verified { color: var(--celeste); font-weight: bold; margin-left: 4px; }
     .unverified { color: #e3b341; font-size: 0.8rem; margin-left: 4px; }
-
-    /* Botones */
-    .btn {
-      display: inline-block;
-      background: var(--celeste);
-      color: #0b1117;
-      font-weight: 700;
-      padding: 0.65rem 1.25rem;
-      border-radius: 6px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      font-size: 0.92rem;
-    }
-    .btn:hover { background: #8ec0ec; }
+    .btn { display: inline-block; background: var(--celeste); color: #0b1117; font-weight: 700; padding: 0.65rem 1.25rem; border-radius: 6px; text-decoration: none; border: none; cursor: pointer; font-size: 0.92rem; }
     .btn-gold { background: var(--gold); color: #0d1115; }
-    .btn-gold:hover { background: #e5c148; }
     .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
-
-    /* Logros */
     .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; }
     .ach-card { background: var(--bg-panel); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 8px; padding: 1rem; }
     .ach-card h4 { color: #fff; margin-bottom: 0.25rem; }
     .ach-card p { font-size: 0.85rem; color: var(--text-muted); }
-
-    /* Formularios Admin */
-    input, textarea, select {
-      width: 100%;
-      background: var(--bg-dark);
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 0.6rem;
-      border-radius: 6px;
-      margin-bottom: 0.75rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
-    }
+    input, textarea { width: 100%; background: var(--bg-dark); border: 1px solid var(--border); color: #fff; padding: 0.6rem; border-radius: 6px; margin-bottom: 0.75rem; }
+    footer { text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 3rem; }
   </style>
 </head>
 <body>
-
   <header>
-    <div style="width:185px; height:185px; margin: 0 auto 1rem; border-radius:50%; overflow:hidden; box-shadow: 0 8px 28px rgba(0,0,0,0.95);">
-  <img src="escudo.png" alt="Escudo Comunidad Argentina Medal of Honor" style="width:100%; height:100%; object-fit:cover; transform:scale(1.24);" />
-</div>
-
-
+    <div class="escudo-wrap">
+      <img src="escudo.png" alt="Escudo Comunidad Argentina Medal of Honor" />
+    </div>
+    <div class="badge-ar">🇦🇷 Escena Oficial Argentina · MOHAA Breakthrough</div>
     <h1>COMUNIDAD DE <span>MEDAL OF HONOR</span></h1>
     <p>Liga competitiva por sistema ELO Modo Objetivo, Mix sin banderas, Salón de la Fama y clasificación para torneos.</p>
     <div class="server-bar">
@@ -202,7 +66,7 @@
       <span>|</span>
       <span>Modo Oficial: <strong>Objetivo (Mín. 4v4 - Máx. 16v16)</strong></span>
       <span>|</span>
-      <span id="last-update">Actualizado: <strong>Esperando datos...</strong></span>
+      <span id="last-update">Actualizado: <strong>Cargando...</strong></span>
     </div>
   </header>
 
@@ -216,48 +80,32 @@
   </nav>
 
   <main>
-    <!-- PESTAÑA INICIO -->
     <section id="inicio" class="section active">
       <div class="seleccion-box">
         <h2>🇦🇷 Convocados Actuales — Selección Argentina (Top 7 ELO)</h2>
         <p>Los 7 jugadores verificados con mayor puntaje ELO representan a Argentina en los desafíos internacionales online.</p>
         <div class="seleccion-grid" id="seleccion-list"></div>
       </div>
-
       <div class="grid-3">
         <div class="card">
           <h3>⚔ Cómo funciona el Sistema ELO</h3>
-          <p style="font-size:0.9rem; color:var(--text-muted);">
-            Todos comienzan con <strong>1000 puntos ELO</strong>. Solo cuentan mapas de <strong>Objetivo</strong> con un mínimo de <strong>4 vs 4 jugadores humanos</strong> (hasta 16 vs 16). Ganar suma ELO y perder resta, premiando el juego en equipo por encima de las horas jugadas.
-          </p>
+          <p style="font-size:0.9rem; color:var(--text-muted);">Todos comienzan con <strong>1000 puntos ELO</strong>. Solo cuentan mapas de <strong>Objetivo</strong> con un mínimo de <strong>4 vs 4 jugadores humanos</strong> (hasta 16 vs 16).</p>
         </div>
         <div class="card">
           <h3>🛡 Partidas Mix Sin Banderas</h3>
-          <p style="font-size:0.9rem; color:var(--text-muted);">
-            Aquí compites como jugador individual. Los equipos se arman equilibrando el ELO promedio de cada bando para garantizar partidas parejas y libres de conflictos entre clanes.
-          </p>
+          <p style="font-size:0.9rem; color:var(--text-muted);">Aquí compites como jugador individual. Los equipos se arman equilibrando el ELO promedio de cada bando.</p>
         </div>
         <div class="card">
           <h3>🔒 Servidor Protegido</h3>
-          <p style="font-size:0.9rem; color:var(--text-muted);">
-            Para evitar ataques y trolls, el servidor permanece oculto y protegido por <strong>Lista Blanca (Whitelist)</strong>. Verifica tu nick por WhatsApp para recibir acceso.
-          </p>
+          <p style="font-size:0.9rem; color:var(--text-muted);">Para evitar ataques y trolls, el servidor permanece oculto y protegido por <strong>Lista Blanca (Whitelist)</strong>.</p>
         </div>
       </div>
-
       <div class="card">
         <h3>🔥 Top 5 del Ranking General</h3>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr>
-                <th>#</th>
-                <th>Jugador</th>
-                <th>Puntos ELO</th>
-                <th>Partidas (4v4+)</th>
-                <th>Victorias</th>
-                <th>K/D</th>
-              </tr>
+              <tr><th>#</th><th>Jugador</th><th>Puntos ELO</th><th>Partidas (4v4+)</th><th>Victorias</th><th>K/D</th></tr>
             </thead>
             <tbody id="top5-table"></tbody>
           </table>
@@ -265,29 +113,16 @@
       </div>
     </section>
 
-    <!-- PESTAÑA RANKING -->
-        <section id="ranking" class="section">
+    <section id="ranking" class="section">
       <div class="card" style="margin-bottom:1rem;">
         <h3>🏆 Tabla Oficial de Posiciones ELO</h3>
-        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">
-          Solo los jugadores con insignia <span class="verified">✔</span> son elegibles para premios y la Selección Argentina.
-        </p>
+        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">Solo los jugadores con insignia <span class="verified">✔</span> son elegibles para premios y la Selección Argentina.</p>
         <input type="text" id="search-player" placeholder="Buscar jugador por nick..." onkeyup="renderTables()" />
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr>
-              <th>Puesto</th>
-              <th>Jugador</th>
-              <th>ELO</th>
-              <th>Partidas</th>
-              <th>Ganadas</th>
-              <th>Perdidas</th>
-              <th>Kills</th>
-              <th>Muertes</th>
-              <th>K/D</th>
-            </tr>
+            <tr><th>Puesto</th><th>Jugador</th><th>ELO</th><th>Partidas</th><th>Ganadas</th><th>Perdidas</th><th>Kills</th><th>Muertes</th><th>K/D</th></tr>
           </thead>
           <tbody id="full-ranking-table"></tbody>
         </table>
@@ -302,36 +137,29 @@
       <div class="ach-grid">
         <div class="ach-card"><h4>🇦🇷 Albiceleste</h4><p>Alcanza el Top 7 del Ranking ELO y entra en zona de Selección Argentina.</p></div>
         <div class="ach-card"><h4>💣 Especialista en Objetivos</h4><p>Gana 25 mapas oficiales en modo Objetivo (4v4 o superior).</p></div>
-        <div class="ach-card"><h4>🎯 Francotirador de Élite</h4><p>Supera los 150 disparos a la cabeza (Headshots) contra jugadores verificados.</p></div>
+        <div class="ach-card"><h4>🎯 Francotirador de Élite</h4><p>Supera los 150 disparos a la cabeza contra jugadores verificados.</p></div>
         <div class="ach-card"><h4>🔥 Imparable</h4><p>Consigue una racha de 15 eliminaciones sin morir en una partida oficial.</p></div>
         <div class="ach-card"><h4>🛡 Soldado Verificado</h4><p>Completa la verificación de tu nick e IP con la administración.</p></div>
         <div class="ach-card"><h4>👑 Veterano de Guerra</h4><p>Completa 50 partidas oficiales sin abandonar antes de terminar el mapa.</p></div>
       </div>
     </section>
-
     <section id="descargas" class="section">
       <div class="grid-3">
         <div class="card">
           <h3>💿 Juego Completo Portable</h3>
-          <img src="juego.jpg" alt="Portada MOHAA Portable" style="width:100%; height:190px; object-fit:cover; border-radius:6px; margin-bottom:0.85rem; border:1px solid var(--border);" />
-          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
-            MOHAA + Spearhead + Breakthrough listo para descomprimir y jugar en Windows 10/11 sin errores.
-          </p>
-          <a href="#" class="btn btn-gold" onclick="alert('Próximamente: aquí pondremos tu enlace de Google Drive / MediaFire')">⬇ Descargar Juego (Próximamente)</a>
+          <img src="juego.jpg" alt="Portada MOHAA" style="width:100%; height:190px; object-fit:cover; border-radius:6px; margin-bottom:0.85rem;" />
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">MOHAA + Spearhead + Breakthrough listo para descomprimir y jugar en Windows 10/11.</p>
+          <a href="#" class="btn btn-gold" onclick="alert('Próximamente')">⬇ Descargar Juego (Próximamente)</a>
         </div>
         <div class="card">
           <h3>🗺 Pack de Mapas Oficiales</h3>
-          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
-            Todos los mapas de Objetivo de la rotación competitiva listos para copiar en la carpeta <code>mainta</code>.
-          </p>
-          <a href="#" class="btn" onclick="alert('Próximamente: aquí pondremos el enlace del Pack de Mapas')">⬇ Descargar Mapas (Próximamente)</a>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">Todos los mapas de Objetivo de la rotación competitiva listos para copiar en <code>mainta</code>.</p>
+          <a href="#" class="btn" onclick="alert('Próximamente')">⬇ Descargar Mapas (Próximamente)</a>
         </div>
         <div class="card">
           <h3>💬 Comunidad WhatsApp</h3>
-          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
-            Únete a los canales de Avisos, Soporte y Chat General para enterarte cuándo se arman los Mix.
-          </p>
-          <a href="#verificar" class="btn btn-outline" onclick="showTab('verificar', document.querySelectorAll('nav button'))">Ir a Verificación</a>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">Únete a los canales de Avisos, Soporte y Chat General para enterarte cuándo se arman los Mix.</p>
+          <button class="btn btn-outline" onclick="showTab('verificar', document.querySelectorAll('nav button')[4])">Ir a Verificación</button>
         </div>
       </div>
     </section>
@@ -339,23 +167,20 @@
     <section id="verificar" class="section">
       <div class="card" style="margin-bottom:1.2rem;">
         <h3>✔ Cómo Verificar tu Nick y Entrar al Servidor</h3>
-        <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:1rem;">
-          Para evitar suplantaciones de identidad, cheats o ataques al servidor, es obligatorio registrar tu nick único con la administración.
-        </p>
+        <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:1rem;">Registra tu nick único con la administración para sumar puntos oficiales y entrar a los Mix.</p>
         <div style="max-width:450px;">
           <label style="font-size:0.85rem; color:var(--gold);">Escribe tu Nick exacto del juego:</label>
-          <input type="text" id="wa-nick" placeholder="Ej: Soldado_AR" />
+          <input type="text" id="wa-nick" placeholder="Ej: |GEA|Maximo" />
           <button class="btn" onclick="sendWhatsApp()">📲 Solicitar Verificación por WhatsApp</button>
         </div>
       </div>
-
       <div class="card">
         <h3>📜 Reglamento Básico de Convivencia</h3>
         <ul style="padding-left:1.2rem; color:var(--text-muted); font-size:0.92rem; line-height:1.8;">
-          <li><strong>Prohibido el uso de cheats, scripts o modificaciones</strong> que otorguen ventaja injusta.</li>
-          <li><strong>Sin banderas ni política de clanes:</strong> en los Mix todos juegan como compañeros bajo el mismo objetivo.</li>
+          <li><strong>Prohibido el uso de cheats o scripts</strong> que otorguen ventaja injusta.</li>
+          <li><strong>Sin banderas ni política de clanes:</strong> en los Mix todos juegan como compañeros.</li>
           <li><strong>Compromiso de partida:</strong> si entras a un Mix 4v4+, debes terminarlo salvo fuerza mayor.</li>
-          <li><strong>Respeto mutuo:</strong> insultos graves, toxicidad o difusión de la IP del servidor conllevan expulsión inmediata.</li>
+          <li><strong>Respeto mutuo:</strong> toxicidad o difusión de la IP del servidor conllevan expulsión inmediata.</li>
         </ul>
       </div>
     </section>
@@ -363,11 +188,9 @@
     <section id="admin" class="section">
       <div class="card" id="admin-login" style="max-width:420px; margin:0 auto;">
         <h3>🔐 Acceso Administración</h3>
-        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.8rem;">Ingresa la clave de administrador para gestionar jugadores y generar la Whitelist.</p>
         <input type="password" id="admin-pass" placeholder="Clave de administrador" />
         <button class="btn btn-gold" onclick="loginAdmin()">Entrar</button>
       </div>
-
       <div id="admin-panel" style="display:none;">
         <div class="grid-3">
           <div class="card">
@@ -378,7 +201,6 @@
           </div>
           <div class="card">
             <h3>📝 Generar Whitelist.cfg</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Copia este texto en tu archivo <code>whitelist.cfg</code> del servidor Linux:</p>
             <textarea id="whitelist-output" rows="5" readonly></textarea>
             <button class="btn btn-gold" onclick="copyWhitelist()">Copiar Whitelist</button>
           </div>
@@ -387,27 +209,11 @@
     </section>
   </main>
 
-  <footer>
-    COMUNIDAD DE MEDAL OF HONOR · Argentina 🇦🇷 · Sistema ELO & Estadísticas Automatizadas
-  </footer>
-
+  <footer>COMUNIDAD DE MEDAL OF HONOR · Argentina 🇦🇷 · Sistema ELO & Estadísticas Automatizadas</footer>
   <script>
-    const WHATSAPP_NUMBER = "5490000000000";
-    const ADMIN_PASSWORD = "admin";
+    const WHATSAPP_NUMBER = "5492615660727";
+    const ADMIN_PASSWORD = "iacc1918";
     let playersData = [];
-
-    fetch('stats.json?v=' + Date.now())
-      .then(res => res.ok ? res.json() : null)
-      .then(data => {
-        if (data && data.players) {
-          playersData = data.players;
-          if (data.updated) {
-            document.getElementById('last-update').innerHTML = `Actualizado: <strong>${data.updated}</strong>`;
-          }
-          renderAll();
-        }
-      })
-      .catch(err => console.error("Error cargando stats.json:", err));
 
     function showTab(tabId, btn) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -418,105 +224,78 @@
 
     function renderAll() {
       playersData.sort((a, b) => b.elo - a.elo);
-      renderSeleccion();
+      const top7 = playersData.filter(p => p.verified).slice(0, 7);
+      const selBox = document.getElementById('seleccion-list');
+      selBox.innerHTML = top7.length === 0
+        ? '<p style="color:var(--text-muted); font-size:0.9rem;">Aún no hay jugadores verificados con tilde ✔ en <code>verificados.json</code>.</p>'
+        : top7.map((p, i) => '<div class="player-sel"><div class="pos">TITULAR #' + (i+1) + '</div><div class="nick">' + p.nick + ' ✔</div><div class="elo">' + p.elo + ' ELO</div></div>').join('');
       renderTables();
       updateWhitelistBox();
     }
 
-    function renderSeleccion() {
-      const top7 = playersData.filter(p => p.verified).slice(0, 7);
-      const container = document.getElementById('seleccion-list');
-      if (top7.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.9rem;">Aún no hay jugadores verificados con tilde ✔ en <code>verificados.json</code>.</p>`;
-        return;
-      }
-      container.innerHTML = top7.map((p, idx) => `
-        <div class="player-sel">
-          <div class="pos">TITULAR #${idx + 1}</div>
-          <div class="nick">${p.nick} ✔</div>
-          <div class="elo">${p.elo} ELO</div>
-        </div>
-      `).join('');
-    }
-
     function renderTables() {
-      const query = (document.getElementById('search-player')?.value || '').toLowerCase();
-      const filtered = playersData.filter(p => p.nick.toLowerCase().includes(query));
-
-      document.getElementById('top5-table').innerHTML = playersData.slice(0, 5).map((p, i) => `
-        <tr>
-          <td><strong>#${i + 1}</strong></td>
-          <td>${p.nick} ${p.verified ? '<span class="verified">✔</span>' : '<span class="unverified">(Sin verificar)</span>'}</td>
-          <td><strong style="color:var(--gold)">${p.elo}</strong></td>
-          <td>${p.matches}</td>
-          <td>${p.wins}</td>
-          <td>${(p.kills / Math.max(1, p.deaths)).toFixed(2)}</td>
-        </tr>
-      `).join('');
-
-      document.getElementById('full-ranking-table').innerHTML = filtered.map((p, i) => `
-        <tr>
-          <td><strong>#${i + 1}</strong></td>
-          <td>${p.nick} ${p.verified ? '<span class="verified">✔</span>' : '<span class="unverified">(Pendiente)</span>'}</td>
-          <td><strong style="color:var(--gold)">${p.elo}</strong></td>
-          <td>${p.matches}</td>
-          <td>${p.wins}</td>
-          <td>${p.losses}</td>
-          <td>${p.kills}</td>
-          <td>${p.deaths}</td>
-          <td>${(p.kills / Math.max(1, p.deaths)).toFixed(2)}</td>
-        </tr>
-      `).join('');
+      const q = (document.getElementById('search-player').value || '').toLowerCase();
+      const filtered = playersData.filter(p => p.nick.toLowerCase().includes(q));
+      document.getElementById('top5-table').innerHTML = playersData.slice(0, 5).map((p, i) =>
+        '<tr><td><strong>#' + (i+1) + '</strong></td><td>' + p.nick + (p.verified ? '<span class="verified">✔</span>' : '<span class="unverified">(Sin verificar)</span>') +
+        '</td><td><strong style="color:var(--gold)">' + p.elo + '</strong></td><td>' + p.matches + '</td><td>' + p.wins + '</td><td>' + (p.kills / Math.max(1, p.deaths)).toFixed(2) + '</td></tr>'
+      ).join('');
+      document.getElementById('full-ranking-table').innerHTML = filtered.map((p, i) =>
+        '<tr><td><strong>#' + (i+1) + '</strong></td><td>' + p.nick + (p.verified ? '<span class="verified">✔</span>' : '<span class="unverified">(Pendiente)</span>') +
+        '</td><td><strong style="color:var(--gold)">' + p.elo + '</strong></td><td>' + p.matches + '</td><td>' + p.wins + '</td><td>' + p.losses + '</td><td>' + p.kills + '</td><td>' + p.deaths + '</td><td>' + (p.kills / Math.max(1, p.deaths)).toFixed(2) + '</td></tr>'
+      ).join('');
     }
 
-        function sendWhatsApp() {
+    function sendWhatsApp() {
       const nick = document.getElementById('wa-nick').value.trim();
-      if (!nick) return alert("Por favor, escribe tu nick del juego primero.");
-      const msg = encodeURIComponent(`Hola! Quiero verificar mi nick "${nick}" para jugar en la COMUNIDAD DE MEDAL OF HONOR.`);
-      window.open(`https://wa.me{WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+      if (!nick) return alert("Escribe tu nick primero.");
+      window.open('https://wa.me' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent('Hola! Quiero verificar mi nick "' + nick + '" para jugar en la COMUNIDAD DE MEDAL OF HONOR.'), '_blank');
     }
 
     function loginAdmin() {
-      const pass = document.getElementById('admin-pass').value;
-      if (pass === ADMIN_PASSWORD) {
+      if (document.getElementById('admin-pass').value === ADMIN_PASSWORD) {
         document.getElementById('admin-login').style.display = 'none';
         document.getElementById('admin-panel').style.display = 'block';
         updateWhitelistBox();
-      } else {
-        alert("Clave incorrecta.");
-      }
+      } else { alert("Clave incorrecta."); }
     }
 
     function addVerifiedPlayer() {
       const nick = document.getElementById('new-nick').value.trim();
       const ip = document.getElementById('new-ip').value.trim();
       if (!nick) return alert("Escribe un nick.");
-      const existing = playersData.find(p => p.nick.toLowerCase() === nick.toLowerCase());
-      if (existing) {
-        existing.verified = true;
-        if (ip) existing.ip = ip;
-      } else {
-        playersData.push({ nick, elo: 1000, matches: 0, wins: 0, losses: 0, kills: 0, deaths: 0, verified: true, ip });
-      }
+      const ex = playersData.find(p => p.nick.toLowerCase() === nick.toLowerCase());
+      if (ex) { ex.verified = true; if (ip) ex.ip = ip; }
+      else { playersData.push({ nick: nick, elo: 1000, matches: 0, wins: 0, losses: 0, kills: 0, deaths: 0, verified: true, ip: ip }); }
       document.getElementById('new-nick').value = '';
       document.getElementById('new-ip').value = '';
       renderAll();
-      alert(`Jugador ${nick} verificado en la lista.`);
+      alert("Jugador " + nick + " verificado.");
     }
 
     function updateWhitelistBox() {
       const box = document.getElementById('whitelist-output');
       if (!box) return;
-      const verified = playersData.filter(p => p.verified);
-      box.value = "// Whitelist generada automáticamente\n" + verified.map(p => `// ${p.nick} - IP: ${p.ip || 'Pendiente'}`).join('\n');
+      box.value = "// Whitelist\n" + playersData.filter(p => p.verified).map(p => "// " + p.nick + " - IP: " + (p.ip || "Pendiente")).join("\n");
     }
 
     function copyWhitelist() {
       const box = document.getElementById('whitelist-output');
       box.select();
       document.execCommand('copy');
-      alert("Whitelist copiada al portapapeles.");
+      alert("Whitelist copiada.");
     }
+
+    fetch('stats.json?v=' + Date.now())
+      .then(r => r.json())
+      .then(d => {
+        if (d && d.players) {
+          playersData = d.players;
+          if (d.updated) document.getElementById('last-update').innerHTML = 'Actualizado: <strong>' + d.updated + '</strong>';
+          renderAll();
+        }
+      })
+      .catch(e => { document.getElementById('last-update').innerHTML = 'Actualizado: <strong>Error al leer stats.json</strong>'; });
   </script>
 </body>
 </html>
