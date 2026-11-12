@@ -469,4 +469,54 @@
       `).join('');
     }
 
-    function sendWhatsApp() {
+        function sendWhatsApp() {
+      const nick = document.getElementById('wa-nick').value.trim();
+      if (!nick) return alert("Por favor, escribe tu nick del juego primero.");
+      const msg = encodeURIComponent(`Hola! Quiero verificar mi nick "${nick}" para jugar en la COMUNIDAD DE MEDAL OF HONOR.`);
+      window.open(`https://wa.me{WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+    }
+
+    function loginAdmin() {
+      const pass = document.getElementById('admin-pass').value;
+      if (pass === ADMIN_PASSWORD) {
+        document.getElementById('admin-login').style.display = 'none';
+        document.getElementById('admin-panel').style.display = 'block';
+        updateWhitelistBox();
+      } else {
+        alert("Clave incorrecta.");
+      }
+    }
+
+    function addVerifiedPlayer() {
+      const nick = document.getElementById('new-nick').value.trim();
+      const ip = document.getElementById('new-ip').value.trim();
+      if (!nick) return alert("Escribe un nick.");
+      const existing = playersData.find(p => p.nick.toLowerCase() === nick.toLowerCase());
+      if (existing) {
+        existing.verified = true;
+        if (ip) existing.ip = ip;
+      } else {
+        playersData.push({ nick, elo: 1000, matches: 0, wins: 0, losses: 0, kills: 0, deaths: 0, verified: true, ip });
+      }
+      document.getElementById('new-nick').value = '';
+      document.getElementById('new-ip').value = '';
+      renderAll();
+      alert(`Jugador ${nick} verificado en la lista.`);
+    }
+
+    function updateWhitelistBox() {
+      const box = document.getElementById('whitelist-output');
+      if (!box) return;
+      const verified = playersData.filter(p => p.verified);
+      box.value = "// Whitelist generada automáticamente\n" + verified.map(p => `// ${p.nick} - IP: ${p.ip || 'Pendiente'}`).join('\n');
+    }
+
+    function copyWhitelist() {
+      const box = document.getElementById('whitelist-output');
+      box.select();
+      document.execCommand('copy');
+      alert("Whitelist copiada al portapapeles.");
+    }
+  </script>
+</body>
+</html>
